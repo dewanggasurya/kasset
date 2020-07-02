@@ -7,24 +7,21 @@ import (
 )
 
 var (
-	ev       kaos.EventHub
-	topicGet string
-	e        error
-)
+	Event kaos.EventHub
+	Topic string
 
-func SetEventHub(parm kaos.EventHub) {
-	ev = parm
-}
+	e error
+)
 
 func Viewer(w http.ResponseWriter, r *http.Request) {
 	assetID := r.URL.Query().Get("assetid")
-	if ev == nil {
+	if Event == nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("EventHub is not initialized"))
 	}
 
 	ad := new(AssetData)
-	if e = ev.Publish(topicGet, assetID, ad); e != nil {
+	if e = Event.Publish(Topic, assetID, ad); e != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(e.Error()))
 	}
