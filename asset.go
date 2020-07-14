@@ -7,8 +7,8 @@ import (
 )
 
 type Asset struct {
-	orm.DataModelBase `json:"-"`
-	ID                string `json:"_id"`
+	orm.DataModelBase `json:"-" bson:"_id"`
+	ID                string `json:"_id" bson:"_id"`
 	Title             string `json:"title"`
 	OriginalFileName  string `json:"originalfilename"`
 	NewFileName       string `json:"newfilename"`
