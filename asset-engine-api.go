@@ -16,7 +16,7 @@ type ReferenceRequest struct {
 	RefID   string
 }
 
-func (ae *AssetAPIEngine) FindAssetByRefID(ctx *kaos.Context, req *ReferenceRequest) ([]*Asset, error) {
+func (ae *AssetAPIEngine) FindByRefID(ctx *kaos.Context, req *ReferenceRequest) ([]*Asset, error) {
 	res := []*Asset{}
 	h, e := ctx.DefaultHub()
 	if e != nil {

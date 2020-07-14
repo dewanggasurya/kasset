@@ -81,7 +81,7 @@ func (a *AssetEngine) Write(ctx *kaos.Context, attachReq *AssetData) (*Asset, er
 	return asset, nil
 }
 
-func (a *AssetEngine) Read(ctx *kaos.Context, id string) (*AssetData, error) {
+func (a *AssetEngine) Read(ctx *kaos.Context, id string) (*Asset, error) {
 	h, e := ctx.DefaultHub()
 	if e != nil {
 		return nil, e
@@ -93,12 +93,14 @@ func (a *AssetEngine) Read(ctx *kaos.Context, id string) (*AssetData, error) {
 		return nil, e
 	}
 
-	bs, e := a.fs.Read(ast.URI)
-	if e != nil {
-		return nil, fmt.Errorf("error reading file. %s", e.Error())
-	}
+	/*
+		bs, e := a.fs.Read(ast.URI)
+		if e != nil {
+			return nil, fmt.Errorf("error reading file. %s", e.Error())
+		}
+	*/
 
-	return &AssetData{ast, bs}, nil
+	return ast, nil
 }
 
 func (ae *AssetEngine) Delete(ctx *kaos.Context, id string) (int, error) {

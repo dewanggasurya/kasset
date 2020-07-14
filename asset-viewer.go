@@ -13,20 +13,54 @@ var (
 	e error
 )
 
-func Viewer(w http.ResponseWriter, r *http.Request) {
-	assetID := r.URL.Query().Get("assetid")
+func (ae *AssetEngine) HttpViewer(w http.ResponseWriter, r *http.Request) {
+	assetID := r.URL.Query().Get("id")
 	if Event == nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("EventHub is not initialized"))
 	}
 
-	ad := new(AssetData)
-	if e = Event.Publish(Topic, assetID, ad); e != nil {
+	ast := new(Asset)
+	if e = Event.Publish(Topic, assetID, ast); e != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(e.Error()))
+		return
 	}
 
-	w.Header().Set("Content-Disposition", "attachment; filename=\""+ad.Asset.OriginalFileName+"\"")
-	w.Header().Set("Content-Type", ad.Asset.ContentType)
-	w.Write(ad.Content)
+	content, e := ae.fs.Read(ast.URI)
+	if e != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(e.Error()))
+		return
+	}
+
+	//w.Header().Set("Content-Disposition", "attachment; filename=\""+ad.Asset.OriginalFileName+"\"")
+	w.Header().Set("Content-Type", ast.ContentType)
+	w.Write(content)
+}
+
+func (ae *AssetEngine) HttpDownloader(w http.ResponseWriter, r *http.Request) {
+	assetID := r.URL.Query().Get("id")
+	if Event == nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("EventHub is not initialized"))
+	}
+
+	ast := new(Asset)
+	if e = Event.Publish(Topic, assetID, ast); e != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(e.Error()))
+		return
+	}
+
+	content, e := ae.fs.Read(ast.URI)
+	if e != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(e.Error()))
+		return
+	}
+
+	w.Header().Set("Content-Disposition", "attachment; filename=\""+ast.OriginalFileName+"\"")
+	w.Header().Set("Content-Type", ast.ContentType)
+	w.Write(content)
 }
