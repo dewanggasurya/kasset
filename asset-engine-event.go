@@ -121,10 +121,37 @@ func (ae *AssetEngine) Delete(ctx *kaos.Context, id string) (int, error) {
 			return 0, e
 		}
 	}
+	h.DeleteQuery(new(AssetReference), dbflex.Eq("assetid", id))
 	if e = h.Delete(a); e != nil {
 		return 0, e
 	}
 	return a.Size, nil
+}
+
+type SaveAttrRequest struct {
+	ID   string                 `json:"_id"`
+	Data map[string]interface{} `json:"data"`
+}
+
+func (ae *AssetEngine) SaveAttr(ctx *kaos.Context, req *SaveAttrRequest) (string, error) {
+	h, e := ctx.DefaultHub()
+	if e != nil {
+		return "", e
+	}
+	a := new(Asset)
+	a.ID = req.ID
+	if e = h.Get(a); e != nil {
+		return "", e
+	}
+	fields := []string{}
+	for k := range req.Data {
+		fields = append(fields, k)
+	}
+	cmd := dbflex.From(a.TableName()).Where(dbflex.Eq("_id", a.ID)).Update(fields...)
+	if _, e = h.Execute(cmd, req.Data); e != nil {
+		return "", e
+	}
+	return req.ID, nil
 }
 
 func getFileType(buffer []byte) (string, string, error) {
