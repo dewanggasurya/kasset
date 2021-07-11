@@ -230,6 +230,10 @@ github.com/jstemmer/go-junit-report v0.0.0-20190106144839-af01ea7f8024/go.mod h1
 github.com/jstemmer/go-junit-report v0.9.1/go.mod h1:Brl9GWCQeLvo8nXZwPNNblvFj/XSXhF0NWZEnDohbsk=
 github.com/jtolds/gls v4.20.0+incompatible h1:xdiiI2gbIgH/gLH7ADydsJ1uDOEzR8yvV7C0MuV77Wo=
 github.com/jtolds/gls v4.20.0+incompatible/go.mod h1:QJZ7F/aHp+rZTRtaJ1ow/lLfFfVYBRgL+9YlvaHOwJU=
+github.com/kanoteknologi/hd v0.0.3 h1:jr+N6N1g3cnIreMnMavi16YjpWF8gWtE1ZW7fHYOk/k=
+github.com/kanoteknologi/hd v0.0.3/go.mod h1:k3peJVyes0/PJLo0Oi7+v+iKCq5+3UhNBTidA21jDxo=
+github.com/kanoteknologi/khc v0.0.0-20201106040214-bfaf5bb62d14 h1:O3pjtSg8lV3FqZyVsopZEJL3/ijWZTpPrYPS0imWDrE=
+github.com/kanoteknologi/khc v0.0.0-20201106040214-bfaf5bb62d14/go.mod h1:3mLuTdVm0OUHN3Jt9PUCW79DkBRf21VATLAbQYpgtG4=
 github.com/karrick/godirwalk v1.8.0/go.mod h1:H5KPZjojv4lE+QYImBI8xVtrBRgYrIVsaRPx4tDPEn4=
 github.com/karrick/godirwalk v1.10.3/go.mod h1:RoGL9dQei4vP9ilrpETWE8CLOZ1kiN0LhBygSwrAsHA=
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=

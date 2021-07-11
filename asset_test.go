@@ -12,10 +12,10 @@ import (
 	"github.com/eaciit/toolkit"
 	cv "github.com/smartystreets/goconvey/convey"
 
-	hc "git.kanosolution.net/kano/kaos/client-engines/http"
-	hd "git.kanosolution.net/kano/kaos/deployer-engines/http"
 	_ "github.com/ariefdarmawan/flexpg"
 	"github.com/ariefdarmawan/kasset"
+	"github.com/kanoteknologi/hd"
+	"github.com/kanoteknologi/khc"
 )
 
 func TestAsset(t *testing.T) {
@@ -64,7 +64,7 @@ func TestAsset(t *testing.T) {
 			cv.So(err, cv.ShouldBeNil)
 			cv.So(len(bs), cv.ShouldBeGreaterThan, 0)
 			cv.Printf("\nReading %.2f MB of data", float64(len(bs))/1024.0/1024.0)
-			c, e := hc.NewHttpClient(hostName, nil)
+			c, e := khc.NewHttpClient(hostName, nil)
 			cv.So(e, cv.ShouldBeNil)
 
 			cv.Convey("save the asset using different name", func() {

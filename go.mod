@@ -15,6 +15,8 @@ require (
 	github.com/eaciit/toolkit v0.0.0-20210610161449-593d5fadf78e
 	github.com/google/uuid v1.1.2
 	github.com/h2non/filetype v1.1.1
+	github.com/kanoteknologi/hd v0.0.3
+	github.com/kanoteknologi/khc v0.0.0-20201106040214-bfaf5bb62d14
 	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
 	github.com/nats-io/nats.go v1.11.0 // indirect
 	github.com/smartystreets/goconvey v1.6.4
